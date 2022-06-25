@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stepper</title>
+  <style>
+    .stepper {
+      background-color: #e5e5e5;
+      /* 横で並べる */
+      /* display: inline-grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr; */
+      display: inline-flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      place-items: center;
+      text-align: center;
+    }
+
+    .step {
+      grid-template-rows: 40px 1fr;
+      grid-template-columns: auto;
+      min-width: 4rem;
+    }
+    /* 線 */
+    .step:before {
+      /* top: 0; */
+      grid-column-start: 1;
+      grid-row-start: 1;
+      width: 100%;
+      height: 4px;
+      content: "";
+      margin-left: -100%;
+      background-color: #e5e5e5;
+    }
+    /* １つ目のstepに線は不要 */
+    .step:first-child:before {
+      content: none;
+    }
+    /* 丸 */
+    .step::after {
+      content: "";
+      z-index: 1;
+
+      position: relative;
+      grid-column-start: 1;
+      grid-row-start: 1;
+      display: grid;
+      place-items: center;
+      place-self: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      background-color: #e5e5e5;
+    }
+    /* primaryのstepの間の線 */
+    .step-primary + .step-primary:before,
+    /* primaryのstepの丸 */
+    .step-primary:after {
+      background-color: blue;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="stepper">
+    <div class="step step-primary">1</div>
+    <div class="step step-primary">2</div>
+    <div class="step step-primary">3</div>
+    <div class="step">4</div>
+    <div class="step">5</div>
+  </div>
+</body>
+</html>
